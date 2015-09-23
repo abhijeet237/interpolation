@@ -1,0 +1,226 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{array}
+\setlength{\extrarowheight}{0.12cm}
+
+\usepackage{graphics, graphicx}
+\usepackage{color}
+\usepackage{a4wide}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{anysize}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{amsfonts} 
+\usepackage{graphicx} 
+\usepackage{fancyhdr}
+\usepackage[us,12hr]{datetime} % `us' makes \today behave as usual in TeX/LaTeX
+\fancypagestyle{plain}{
+\fancyhf{}
+\rfoot{{\ddmmyyyydate\today} - \currenttime}
+
+\renewcommand{\headrulewidth}{0pt}}
+\pagestyle{plain}
+\author{GROUP - 5} 
+\title{Study Of Various Polynomial Interpolation Schemes} % change this
+% change this
+
+\date{\today} % change this
+
+\begin{document}
+
+%%%%%%%%%% PRELIMINARY MATERIAL %%%%%%%%%%
+\maketitle
+\begin{center}
+\title\textbf{Authors}
+\end{center}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Name & Roll Number & Discipline\\
+\hline
+Abhijeet Singh Panwar & 201351005 & CS\\
+Ajay Shewale & 201351030  & CS\\
+Dilip Puri & 201351014 & CS\\
+Rahul Nalawade & 201351017 & CS\\
+Sudhanshu Jaiswal & 201352012 & IT\\
+Sonu Patidar & 201351016 & CS\\
+\hline
+\end{tabular}
+\end{center}
+
+
+
+\begin{center}
+Supervised by Dr.\ Pratik Shah. % change this
+\end{center}
+\newpage
+
+\tableofcontents
+
+\newpage
+\maketitle
+\begin{center}
+\title{Acknowledgement of Sources}
+\end{center} % this must be included in undergradate projects
+For all ideas taken from other sources (books, articles, internet), the source of the ideas is mentioned in the main text and fully referenced at the end of the report.
+
+All material which is quoted essentially word-for-word from other sources is given in quotation marks and referenced.
+
+Pictures and diagrams copied from the internet or other sources are labelled with a reference to the web page or book, article etc.
+\\[12pt]
+Date \dotfill
+
+%%%%%%%%%% MAIN TEXT STARTS HERE %%%%%%%%%%
+
+%%%%%%%%%% SECTION %%%%%%%%%%
+\newpage
+\maketitle
+\section{Introduction}
+\hrule
+$\downarrow$\\
+In Engineering and Sciences,one often has a number of \textbf{data points},obtained by sampling or experimentation,which may represent the value of a function for a limited number of values of the independent variables.It is often required to \textbf{interpolate}(i.e,estimate) the value of that function for an intermidiate value of the independent variables.\\This action is accomplished by using various methods of interpolation,discussed in the following articles.
+\section{Definition}\hrule
+$\downarrow$\\
+Interpolation is a method of contructing new data points within the range of \textbf{discrete set} of known data points.\\Since data is provided as \textbf{discrete set of points},$(x_0,y_0),(x_1,y_1),(x_2,y_2)...(x_k,y_k)$\\
+A \textbf{continuous function $f(x)$} passing through these points may be used to represent these k+1 data values.\\
+So now,one can find values of y for all x.\\This \textbf{interpolating function $f(x)$} can be chosen wisely according to the required result.\\
+The most common interpolating function is a polynomial as it is easy to:
+\begin{itemize}
+\item evaluate
+\item differentiate
+\item integrate,etc
+\end{itemize}
+\newpage
+\section{Polynomial interpolation}
+\hrule
+$\downarrow$\\
+Interpolation of a given data set by a polynomial passing through every point is simply a polynomial interpolation.\\It invovles the polynomial $P(x)$ of degree n passing through given n+1 points.
+\subsection{Quadratic Interpolation}
+In quadratic interpolation there are given 3 points,using those we have to come up with a quadratic curve which pasess through all three points.
+\\
+ Suppose those three points are  \[(x_1,y_1),(x_2,y_2) \& (x_3,y_3)\] Therefore,a curve of general form \[y=a*x^2+b*x+c\] should satisfy these points to \[a*x_1^2+b*x_1+c=y_1\] \[a*x_2^2+b*x_2+c=y_2\]\[a*x_3^2+b*x_3+c=y_3\] Now the values of a , b \& c is given by
+
+$3 \times 3$~matrix 
+\[  \underbrace{\left( \begin{array}{ccc}
+x_1^2 & x_1 & 1 \\
+x_2^2 & x_2 & 1 \\
+ x_3^2 & x_3 & 1 \end{array} \\ \right)} 
+\left( \begin{array}{ccc}
+a\\
+b\\
+c\end{array} \right)=\left(\begin{array}{ccc}
+y_1\\
+y_2\\
+y_3\\
+\end{array} \right)\]\\
+From this we can deduce value of co-efficients a , b \& c by\\
+\[ \left(\begin{array}{ccc}
+a\\
+b\\
+c\end{array} \right)= x^{-1} \left(\begin{array}{ccc}
+y_1\\
+y_2\\
+y_3\\
+\end{array} \right)\] \\
+\textbf{NOTE}$\rightarrow$For interpolation scheme in image processing "x" can be taken as distance function \& "y"
+can be represented as the value of pixel at that position.\\ \\
+\underline{\textbf{Theorem}}$\rightarrow$ Given \underline{n} data points \[(x_1,y_1),...(x_n,y_n)\]  \[if\ x_1<x_2<...<x_n\] then there exist a unique interpolating polynomial \[y=a_
+{n-1}*x^{n-1}+a_{n-2}*x^{n-2}+a_{n-3}*x^{n-3}+...+a_0  \] with degree less than or equal to (n-1),this provides one condition that no two x are equal in our set of data points.
+\subsection{Linear interpolation}\hrule
+$\downarrow$\\
+Linear Interpolation involves Interpolating Function f(x) to be a Straight Line between two interpolating points.For a value of x in the interval $(x_0,x_1)$, the value of y is given from the equation              which can interpreted using general form of a Straight Line.
+So, one can call it as a weighted average of two data points, too.
+ For a given Set of Data points $(x_0,y_0),(x_1,y_1),...,(x_n,y_n)$, we can Concatenate the interpolants between each pair of data points. Thus, we've a Continuous Function f(x), but Discontinuous at each data points.
+
+\section{\textbf{Lagrange Interpolating Polynomial}}
+\subsection{What is Lagrange interpoaltion}
+The interpolating polynomial of least degree is unique,and lagrange formulae for interpolating curves ensure that the curve is of at least two degrees.
+\subsection{Interpoaltion Formula}
+$\Longrightarrow$ for k+1 data points:
+
+\[L(x)=\sum\limits^k_{j=0}{y_j}*{l_j}(x)\] \[{l_j}(x)=\\\prod_{0<=m<=k}\dfrac{x-x_m}{x_j-x_m}\]
+\[L(x)= \sum\limits^k_{j=0}{y_j}*\prod_{0<=m<=k}\dfrac{x-x_m}{x_j-x_m}\]
+\[L(x)= y_0*\dfrac{x-x_1}{x_0-x_1}\dfrac{x-x_2}{x_0-x_2}\dfrac{x-x_3}{x_0-x_3}\dotsb\dfrac{x-x_k}{x_0-x_k}\]\[+y_1*\dfrac{x-x_0}{x_1-x_0}\dfrac{x-x_2}{x_1-x_2}\dfrac{x-x_3}{x_1-x_3}\dotsb\dfrac{x-x_k}{x_1-x_k}\]
+\[+\dotsb y_k\dfrac{x-x_0}{x_k-x_0}*\dfrac{x-x_1}{x_k-x_1}\]\[\dotsb\dfrac{x-x_{k-1}}{x_k-x_{k-1}}\]
+$\Longrightarrow$ If x=x1 means writing the same point in the function we are interpolating then \[L(x)=y_i\].
+
+\section{Newton's Interpolation}
+We are interested in finding out a polynomial which interpolates a pair of (x,y).Since we know that a polynomial of degree n can pass through n+1 points ,so we assume a polynomial of degree P(x) which interpolates \[(x_0,y_0),(x_1,y_1)\dotsb(x_n,y_n)\]Meanwhile,we can say that\[P_{n-1}(x) \text{passes through} (x_0,y_0),(x_1,y_1)\dotsb(x_{n-1},y_{n-1})\] Here \[P_n(x) \\and P_{n-1}(x) {\text{agrees at}} x_0,x_1\dotsb,x_{n-1}\]means
+\[ P_n(x_0)=P_{n-1}(x_0)\]\[\vdots\]
+\[P_n(x_{n-1})=P_{n-1}(x_{n-1})\]The difference of these two polnomial is a polynomial of at most degree n.
+So we can write:\[P_n(x)=P_{n-1}(x)+G_n(x)  \dot{................} 1 \]from the above equation G(x) can't be a constant,hence can only be at the form\[G_n(x)=a_n(x-x_0)(x-x_1)(x-x_2)\dotsb(x-x_n)\]
+from 1 \[G_n(x)=P_n(x)-P_{n-1}(x)\] \[a_n=\dfrac{P_n(x)-P_{n-1}(x)}{(x-x_0)(x-x_1)\dotsb(x-x_{n-1})}\] here \[a_n \text{is constant}\] to find out the value of constant x can be any x from our interpolated data set so,x can be replaced by \[a_n \text{which is interpolated by} P_n \text{but not} P_{n-1}\] So,
+\[a_n=\dfrac{P_n(x_n)-P_{n-1}(x_n)}{(x_n-x_0)(x_n-x_1)\dotsb(x_n-x_{n-1})}\] now for n=1 \[a_1=\dfrac{P_n(x_1)-P_(n-1)(x_1)}{x_1-x_0}\] \[a_1=\dfrac{P_1(x_1)-P_0(x_1)}{x_1-x_0} \] here P(x) is a constant polynomial or in other words it interpolates at only one point ,i.e.\[(x_0,y_0)\] So \[a_1=\dfrac{P_1(x_1)-(y_0)}{(x_1)-(x_0)}\]here\[P_1(x_1)=y_1\] Divided difference between two points\[a_1=\underbrace{\dfrac{y_1-y_0}{x_1-x_0}}=F(x_1,x_0)\]\[P_1(x)=P_0+a_1(x-x_0)\]\[P_1(x)=F_0+a_1(x-x_0)\]Similarly for n=2
+\[a_2=\dfrac{P_2(x_2)-P_1(x_2)}{(x_2-x_0)(x_2-x_1)}\] \[P_1(x_2)=F_0+a_1(x_2-x_0)\]So,
+\[a_2=\dfrac{P_2(x_2)-F_0-a_1(x_2-x_0)}{(x_2-x_0)(x_2-x_1)}\]\[=\dfrac{y_2-F_0-a_1(x_2-x_0)}{x_2-x_0}\]On evaluating the equation \[a_2=F[x_0,x_1,x_2]\dotsb \text{Divided difference}\] So
+\[P_2(x)=P_1(x)+F[x_0,x_1,x_2](x-x_0)(x-x_1)\]hence,in general form \[\boxed{P_k(x)=P_{k-1}+F[x_0,x_1\dotsb,x_k](x-x_0)(x-x_1)(x-x_k)}\]On recursively solving this gives \[P_n(x=F_0+(x-x_0)F[x-x_0]+(x-x_0)(x-x_1)F[x_0,x_1,x_2]\]\[+\dotsb+(x-x_0)(x-x_1)\dotsb(x-x_{n-1}F[x_0,x_1,x_2 \dotsb x_n]\]
+
+\newpage
+\section{Present Development Over Project}\hrule
+$\downarrow$\\
+%%%%%%%%%% INFORMATION %%%%%%%%%%
+
+Till now we are working over the field of digital image processing ,which includes,image magnification and geometrical transformations.
+\\
+\subsection{Image Magnification}\hrule
+$\downarrow$ \\
+Stepwise Development:\\
+\begin{itemize}
+\item Fetching a sample digital image.\\
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{cc}
+\includegraphics[width=2.5in]{sample.jpeg} &
+\includegraphics[width=3.5in]{sample1.png}
+\end{array}$
+\end{center}
+\caption{Sample image \& its respective Data sheet}
+\end{figure}
+\newpage
+\item Doubling the order of the matrice and moving all the initial data points to even order points,keeping all other remaining data points empty.
+\\
+\begin{figure}[htbp]
+\centering
+
+  \includegraphics[width=1.015\linewidth]{intermediate.png}
+  \caption{Data Sheet After Scaling}
+  \label{fig:sub1}
+
+\end{figure}
+
+
+\item Our aim is to fill the remaining data points using linear interpolation . What we do is to fill each row using linear interpolation and then each column with linear interpolation so the value of A is weighted average of  1 \& 2 hence,\\
+\begin{center}
+A=[value(1)+value(2)]/2
+\end{center} 
+The general equation representing linear interpolation is$\rightarrow$
+	\[c=\lambda(c_1)+1-\lambda(c_2)\] here,
+\[\lambda\rightarrow parameter\] \[c=value[A]\] and \[c_1=value[1]\] \\
+\begin{figure}[h]
+\begin{center}$
+\begin{array}{cc}
+\includegraphics[width=3.05in]{interpolated.jpeg} &
+\includegraphics[width=3.05in]{data2.png}
+\end{array}$
+\end{center}
+\caption{Sample image \& its respective Data sheet After Interpolation}
+\end{figure}
+
+therefore,the general equation representing linear interpolation is $\rightarrow$
+\item Now the new data point generated contains the properties of both data points.
+\item Also the resulting image is of 2x of the previous sample image in both dimensions.\\
+\begin{figure}[htbp]
+\centering
+\includegraphics[scale=0.5]{interpolated.jpeg}
+\caption{Resulting Image}
+
+\end{figure}
+\end{itemize}
+\newpage
+\begin{center}
+\section{\textbf{Reasearch And References }}\hrule
+\begin{itemize}
+\item 
+\end{itemize}
+\end{center}
+\end{document}
